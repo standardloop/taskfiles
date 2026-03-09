@@ -1,0 +1,17 @@
+---
+version: '3'
+
+includes:
+  rancher: https://raw.githubusercontent.com/standardloop/taskfiles/refs/heads/main/rancher.yml
+  color: https://raw.githubusercontent.com/standardloop/taskfiles/refs/heads/main/color.yml
+
+tasks:
+  default:
+    aliases: [all]
+    silent: true
+    deps:
+      - color
+
+  clean:
+    deps:
+      - rancher:clean

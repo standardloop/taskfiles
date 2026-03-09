@@ -1,9 +1,6 @@
 ---
 extends: default
 
-ignore: |
-  archive/
-
 rules:
   braces:
     max-spaces-inside: 1
@@ -12,3 +9,4 @@ rules:
   comments-indentation: disable
   indentation: disable
   line-length: disable
+  truthy: disable

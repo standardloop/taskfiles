@@ -11,6 +11,7 @@ remote:
   trusted-hosts:
     - github.com
     - gitlab.com
+    - raw.githubusercontent.com
   cacert: ""
   cert: ""
   cert-key: ""
