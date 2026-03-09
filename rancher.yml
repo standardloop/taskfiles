@@ -1,23 +1,17 @@
 ---
 version: '3'
 
-vars:
-  TEXT_BOLD: { sh: tput bold }
-  TEXT_GRAY: { sh: tput setaf 0 }
-  TEXT_RED: { sh: tput setaf 1 }
-  TEXT_GREEN: { sh: tput setaf 2 }
-  TEXT_YELLOW: { sh: tput setaf 3 }
-  TEXT_DARK_BLUE: { sh: tput setaf 4 }
-  TEXT_PURPLE: { sh: tput setaf 5 }
-  TEXT_LIGHT_BLUE: { sh: tput setaf 6 }
-  TEXT_RESET: { sh: tput sgr0 }
+includes:
+  color: color.yml
 
 tasks:
-  rancher:
+  default:
+    aliases: [all]
+    silent: true
     deps:
-      - rancher:run
+      - start
 
-  rancher:run:
+  start:
     run: once
     silent: true
     cmds:
@@ -40,7 +34,7 @@ tasks:
       - rdctl list-settings > /dev/null 2>&1
       - docker info > /dev/null 2>&1
 
-  rancher:clean:
+  clean:
     run: once
     cmds:
       - rdctl shutdown
