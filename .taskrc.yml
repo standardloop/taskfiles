@@ -1,0 +1,16 @@
+---
+experiments:
+  REMOTE_TASKFILES: 1
+
+remote:
+  insecure: false
+  offline: false
+  timeout: "30s"
+  cache-expiry: "24h"
+  cache-dir: ~/.task
+  trusted-hosts:
+    - github.com
+    - gitlab.com
+  cacert: ""
+  cert: ""
+  cert-key: ""

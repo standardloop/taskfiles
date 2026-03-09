@@ -1,0 +1,46 @@
+---
+version: '3'
+
+vars:
+  TEXT_BOLD: { sh: tput bold }
+  TEXT_GRAY: { sh: tput setaf 0 }
+  TEXT_RED: { sh: tput setaf 1 }
+  TEXT_GREEN: { sh: tput setaf 2 }
+  TEXT_YELLOW: { sh: tput setaf 3 }
+  TEXT_DARK_BLUE: { sh: tput setaf 4 }
+  TEXT_PURPLE: { sh: tput setaf 5 }
+  TEXT_LIGHT_BLUE: { sh: tput setaf 6 }
+  TEXT_RESET: { sh: tput sgr0 }
+
+tasks:
+  rancher:
+    deps:
+      - rancher:run
+
+  rancher:run:
+    run: once
+    silent: true
+    cmds:
+      - rdctl start --application.start-in-background
+      - |
+        attempts=30
+        while ! docker info > /dev/null 2>&1
+        do
+          echo "{{.TEXT_YELLOW}}Waiting for docker to come up....{{.TEXT_RESET}}"
+          sleep 5
+          let attempts=$attempts-1
+          if [ $attempts -eq 0 ]
+          then
+            echo "{{.TEXT_RED}}docker never came up!{{.TEXT_RESET}}"
+            exit 1
+          fi
+        done
+        echo "{{.TEXT_GREEN}}Docker came up!{{.TEXT_RESET}}"
+    status:
+      - rdctl list-settings > /dev/null 2>&1
+      - docker info > /dev/null 2>&1
+
+  rancher:clean:
+    run: once
+    cmds:
+      - rdctl shutdown

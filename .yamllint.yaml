@@ -1,0 +1,14 @@
+---
+extends: default
+
+ignore: |
+  archive/
+
+rules:
+  braces:
+    max-spaces-inside: 1
+  brackets:
+    max-spaces-inside: 1
+  comments-indentation: disable
+  indentation: disable
+  line-length: disable
