@@ -17,14 +17,14 @@ tasks:
     silent: true
     aliases: [run, deploy, on, init]
     cmds:
-      - rdctl start --application.start-in-background
+      - colima start
       - task: util:wait-for-docker-to-come-up
     status:
-      - rdctl list-settings > /dev/null 2>&1
+      - colima status > /dev/null 2>&1
       - docker info > /dev/null 2>&1
 
   clean:
     run: once
     aliases: [destroy, shutdown, delete, off]
     cmds:
-      - rdctl shutdown
+      - colima delete

@@ -1,0 +1,26 @@
+---
+version: '3'
+
+includes:
+  color: color.yml
+
+tasks:
+  wait-for-docker-to-come-up:
+    silent: true
+    cmds:
+      - |
+        attempts=30
+        while ! docker info > /dev/null 2>&1
+        do
+          echo "{{.TEXT_YELLOW}}Waiting for docker to come up....{{.TEXT_RESET}}"
+          sleep 5
+          let attempts=$attempts-1
+          if [ $attempts -eq 0 ]
+          then
+            echo "{{.TEXT_RED}}docker never came up!{{.TEXT_RESET}}"
+            exit 1
+          fi
+        done
+        echo "{{.TEXT_GREEN}}Docker came up!{{.TEXT_RESET}}"
+    status:
+      - docker info > /dev/null 2>&1
