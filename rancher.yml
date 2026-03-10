@@ -3,7 +3,7 @@ version: '3'
 
 includes:
   color: color.yml
-  util: util.yml
+  docker: docker.yml
 
 tasks:
   default:
@@ -18,7 +18,7 @@ tasks:
     aliases: [run, deploy, on, init]
     cmds:
       - rdctl start --application.start-in-background
-      - task: util:wait-for-docker-to-come-up
+      - task: docker:wait-for-ready
     status:
       - rdctl list-settings > /dev/null 2>&1
       - docker info > /dev/null 2>&1

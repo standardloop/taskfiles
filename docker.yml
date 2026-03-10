@@ -5,14 +5,15 @@ includes:
   color: color.yml
 
 tasks:
-  wait-for-docker-to-come-up:
+  # TODO: add variables for sleeptime and attempts
+  wait-for-ready:
     silent: true
     cmds:
       - |
         attempts=30
         while ! docker info > /dev/null 2>&1
         do
-          echo "{{.TEXT_YELLOW}}Waiting for docker to come up....{{.TEXT_RESET}}"
+          echo "{{.TEXT_YELLOW}}Waiting for docker to come up...{{.TEXT_RESET}}"
           sleep 5
           let attempts=$attempts-1
           if [ $attempts -eq 0 ]
