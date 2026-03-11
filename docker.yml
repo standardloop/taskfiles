@@ -5,16 +5,21 @@ includes:
   color: color.yml
 
 tasks:
-  # TODO: add variables for sleeptime and attempts
   wait-for-ready:
     silent: true
+    vars:
+      DOCKER_WAIT_FOR_READY_ATTEMPTS: '{{.DOCKER_WAIT_FOR_READY_ATTEMPTS | default 30}}'
+      DOCKER_WAIT_FOR_READY_SLEEP_TIME: '{{.DOCKER_WAIT_FOR_READY_SLEEP_TIME | default 5}}'
     cmds:
       - |
-        attempts=30
+        echo "{{.DOCKER_WAIT_FOR_READY_ATTEMPTS}}"
+        echo "{{.DOCKER_WAIT_FOR_READY_SLEEP_TIME}}"
+        exit 0
+        attempts={{.DOCKER_WAIT_FOR_READY_ATTEMPTS}}
         while ! docker info > /dev/null 2>&1
         do
           echo "{{.TEXT_YELLOW}}Waiting for docker to come up...{{.TEXT_RESET}}"
-          sleep 5
+          sleep {{.DOCKER_WAIT_FOR_READY_SLEEP_TIME}}
           let attempts=$attempts-1
           if [ $attempts -eq 0 ]
           then
