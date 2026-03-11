@@ -12,9 +12,6 @@ tasks:
       DOCKER_WAIT_FOR_READY_SLEEP_TIME: '{{.DOCKER_WAIT_FOR_READY_SLEEP_TIME | default 5}}'
     cmds:
       - |
-        echo "{{.DOCKER_WAIT_FOR_READY_ATTEMPTS}}"
-        echo "{{.DOCKER_WAIT_FOR_READY_SLEEP_TIME}}"
-        exit 0
         attempts={{.DOCKER_WAIT_FOR_READY_ATTEMPTS}}
         while ! docker info > /dev/null 2>&1
         do
