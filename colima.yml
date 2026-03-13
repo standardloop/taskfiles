@@ -17,9 +17,9 @@ tasks:
     silent: true
     aliases: [run, deploy, on, init]
     vars:
-      COLIMA_FLAGS: '{{.COLIMA_FLAGS | default ""}}'
+      FLAGS: '{{.FLAGS | default ""}}'
     cmds:
-      - colima start {{.COLIMA_FLAGS}}
+      - colima start {{.FLAGS}}
       - task: docker:wait-for-ready
     status:
       - colima status > /dev/null 2>&1
@@ -28,5 +28,7 @@ tasks:
   clean:
     run: once
     aliases: [destroy, shutdown, delete, off]
+    vars:
+      FLAGS: '{{.FLAGS | default ""}}'
     cmds:
-      - colima delete
+      - colima delete {{.FLAGS}}
