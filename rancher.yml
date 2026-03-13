@@ -16,8 +16,10 @@ tasks:
     run: once
     silent: true
     aliases: [run, deploy, on, init]
+    vars:
+      RANCHER_FLAGS: '{{.RANCHER_FLAGS | default ""}}'
     cmds:
-      - rdctl start --application.start-in-background
+      - rdctl start --application.start-in-background {{.RANCHER_FLAGS}}
       - task: docker:wait-for-ready
     status:
       - rdctl list-settings > /dev/null 2>&1

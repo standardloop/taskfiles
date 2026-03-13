@@ -17,7 +17,7 @@ tasks:
     silent: true
     aliases: [run, deploy, on, init]
     vars:
-      FLAGS: '{{.COLIMA_FLAGS | default ""}}'
+      COLIMA_FLAGS: '{{.COLIMA_FLAGS | default ""}}'
     cmds:
       - colima start {{.COLIMA_FLAGS}}
       - task: docker:wait-for-ready
