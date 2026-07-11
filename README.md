@@ -1,8 +1,8 @@
 # taskfiles
 
-[https://github.com/standardloop/taskfiles](https://github.com/standardloop/taskfiles)
-
 [![GitHub Release](https://img.shields.io/github/v/release/standardloop/taskfiles?sort=semver)](https://github.com/standardloop/taskfiles/releases)
+
+[https://github.com/standardloop/taskfiles](https://github.com/standardloop/taskfiles)
 
 My collection of re-usable [Taskfiles](https://github.com/go-task/task)
 
@@ -79,6 +79,8 @@ tasks:
 
 This Taskfile contains tasks for spinning up [rancher docker engine](https://github.com/rancher-sandbox/rancher-desktop/).
 
+### Using in your Taskfile
+
 Example:
 ```yml
 ---
@@ -121,6 +123,7 @@ Shutting down.
 
 This Taskfile contains tasks for spinning up [colima docker engine](https://github.com/abiosoft/colima).
 
+### Using in your Taskfile
 
 Example:
 ```yaml
