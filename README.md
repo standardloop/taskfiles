@@ -2,6 +2,8 @@
 
 [![GitHub Release](https://img.shields.io/github/v/release/standardloop/taskfiles?sort=semver)](https://github.com/standardloop/taskfiles/releases)
 
+---
+
 [https://github.com/standardloop/taskfiles](https://github.com/standardloop/taskfiles)
 
 My collection of re-usable [Taskfiles](https://github.com/go-task/task)
