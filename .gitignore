@@ -1,2 +1,5 @@
 .task
-Taskfile.test.yml
+kind/
+k8s-helpers.yaml
+kind.yaml
+# *.test.yml

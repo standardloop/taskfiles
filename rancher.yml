@@ -13,6 +13,8 @@ tasks:
       - start
 
   start:
+    desc: |
+      Start Rancher Docker Engine
     run: once
     silent: true
     aliases: [run, deploy, on, init]
@@ -26,7 +28,9 @@ tasks:
       - docker info > /dev/null 2>&1
 
   clean:
+    desc: |
+      Shutdown Rancher Docker Engine
     run: once
-    aliases: [destroy, shutdown, delete, off]
+    aliases: [destroy, shutdown, delete, off, clean]
     cmds:
       - rdctl shutdown

@@ -7,6 +7,8 @@ includes:
 tasks:
   wait-for-ready:
     silent: true
+    desc: |
+      Wait for Docker to come up.
     vars:
       DOCKER_WAIT_FOR_READY_ATTEMPTS: '{{.DOCKER_WAIT_FOR_READY_ATTEMPTS | default 30}}'
       DOCKER_WAIT_FOR_READY_SLEEP_TIME: '{{.DOCKER_WAIT_FOR_READY_SLEEP_TIME | default 5}}'

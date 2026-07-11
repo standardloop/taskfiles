@@ -1,0 +1,20 @@
+---
+version: '3'
+
+includes:
+  colima: ../colima.yml
+
+env:
+  DOCKER_ENGINE_CPUS: 4
+  DOCKER_ENGINE_MEMORY: 8
+
+tasks:
+  default:
+    silent: true
+    cmds:
+      - task: colima:start
+        vars:
+          FLAGS: "--network-address --cpu {{.DOCKER_ENGINE_CPUS}} --memory {{.DOCKER_ENGINE_MEMORY}}"
+  clean:
+    cmds:
+      - task: colima:clean

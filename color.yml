@@ -21,6 +21,8 @@ tasks:
 
   test:
     silent: true
+    desc: |
+      Prints out all the colors avaiable.
     cmds:
       - echo "TEXT_NORMAL"
       - echo "{{.TEXT_BOLD}}TEXT_BOLD{{.TEXT_RESET}}"

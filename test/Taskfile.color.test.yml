@@ -1,0 +1,12 @@
+---
+version: '3'
+
+includes:
+  color: ../color.yml
+
+tasks:
+  default:
+    silent: true
+    cmds:
+      - echo "{{.TEXT_YELLOW}}waiting....{{.TEXT_RESET}}"
+      - echo "{{.TEXT_GREEN}}waiting....{{.TEXT_RESET}}"

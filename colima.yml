@@ -13,6 +13,8 @@ tasks:
       - start
 
   start:
+    desc: |
+      Start up colima.
     run: once
     silent: true
     aliases: [run, deploy, on, init]
@@ -26,9 +28,11 @@ tasks:
       - docker info > /dev/null 2>&1
 
   clean:
+    desc: |
+      Delete colima, automatically say yes.
     run: once
-    aliases: [destroy, shutdown, delete, off]
+    aliases: [destroy, shutdown, delete, off, clean]
     vars:
       FLAGS: '{{.FLAGS | default ""}}'
     cmds:
-      - colima delete {{.FLAGS}}
+      - yes | colima delete {{.FLAGS}}
