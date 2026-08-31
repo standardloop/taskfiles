@@ -10,7 +10,11 @@ My collection of re-usable [Taskfiles](https://github.com/go-task/task)
 
 ## How to use
 
-### Enabling Remote Taskfiles
+### Newest version of task
+
+- https://taskfile.dev/docs/remote-taskfiles
+
+### Before Enabling Remote Taskfiles as an Experiment
 
 - https://taskfile.dev/docs/experiments/remote-taskfiles
 - https://taskfile.dev/docs/experiments/#enabling-experiments
