@@ -6,7 +6,7 @@ repos:
       - id: trailing-whitespace
       - id: end-of-file-fixer
   - repo: https://github.com/adrienverge/yamllint
-    rev: v1.37.1
+    rev: v1.38.0
     hooks:
       - id: yamllint
         args: [--strict]

@@ -14,19 +14,6 @@ My collection of re-usable [Taskfiles](https://github.com/go-task/task)
 
 - https://taskfile.dev/docs/remote-taskfiles
 
-### Before Enabling Remote Taskfiles as an Experiment
-
-- https://taskfile.dev/docs/experiments/remote-taskfiles
-- https://taskfile.dev/docs/experiments/#enabling-experiments
-
-#### Your `.taskrc`
-
-```yaml
----
-experiments:
-  REMOTE_TASKFILES: 1
-```
-
 #### Your Taskfile
 
 ```yaml
@@ -37,6 +24,7 @@ includes:
   color: https://raw.githubusercontent.com/standardloop/taskfiles/refs/tags/{{.STANDARDLOOP_TASKFILES_VERSION}}/color.yml
   rancher: https://raw.githubusercontent.com/standardloop/taskfiles/refs/tags/{{.STANDARDLOOP_TASKFILES_VERSION}}/rancher.yml
   colima: https://raw.githubusercontent.com/standardloop/taskfiles/refs/tags/{{.STANDARDLOOP_TASKFILES_VERSION}}/colima.yml
+  c: https://raw.githubusercontent.com/standardloop/taskfiles/refs/tags/{{.STANDARDLOOP_TASKFILES_VERSION}}/c.yml
 ```
 
 ## Color
