@@ -1,7 +1,4 @@
 ---
-experiments:
-  REMOTE_TASKFILES: 1
-
 # interactive: true
 
 remote:
@@ -14,6 +11,3 @@ remote:
     - github.com
     - gitlab.com
     - raw.githubusercontent.com
-  cacert: ""
-  cert: ""
-  cert-key: ""

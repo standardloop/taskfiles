@@ -52,6 +52,7 @@ task: Available tasks for this project:
 * test:          Prints out all the colors avaiable.
 $ task --taskfile color.yml
 ```
+
 ![alt text](https://raw.githubusercontent.com/standardloop/taskfiles/refs/heads/main/docs/color.png)
 
 ### Using in your Taskfile
@@ -63,9 +64,10 @@ In general, you will use it like this:
 `{{.TEXT_YOUR_CHOICE_HERE}} your message here {{.TEXT_RESET}}`
 
 Example:
+
 ```yaml
 ---
-version: '3'
+version: "3"
 
 vars:
   STANDARDLOOP_TASKFILES_VERSION: "v0.0.6"
@@ -88,9 +90,10 @@ This Taskfile contains tasks for spinning up [rancher docker engine](https://git
 ### Using in your Taskfile
 
 Example:
+
 ```yml
 ---
-version: '3'
+version: "3"
 
 vars:
   STANDARDLOOP_TASKFILES_VERSION: "v0.0.6"
@@ -112,6 +115,7 @@ tasks:
 ```
 
 Running:
+
 ```sh
 $ task
 INFO[0000] About to launch /usr/bin/open -a /Applications/Rancher Desktop.app --args --application.startInBackground=true --virtualMachine.memoryInGB 8 --virtualMachine.numberCPUs 4 ...
@@ -132,9 +136,10 @@ This Taskfile contains tasks for spinning up [colima docker engine](https://gith
 ### Using in your Taskfile
 
 Example:
+
 ```yaml
 ---
-version: '3'
+version: "3"
 
 vars:
   STANDARDLOOP_TASKFILES_VERSION: "v0.0.6"
@@ -159,6 +164,7 @@ tasks:
 ```
 
 Running:
+
 ```sh
 $ task
 INFO[0000] starting colima
@@ -173,3 +179,7 @@ are you sure you want to delete colima and all settings? [y/N] INFO[0000] deleti
 INFO[0000] deleting ...                                  context=docker
 INFO[0000] done
 ```
+
+## C
+
+Some reusable tasks for formating and generating docs.
