@@ -171,3 +171,11 @@ INFO[0000] done
 ## C
 
 Some reusable tasks for formating and generating docs.
+
+## Clearing cache
+
+```sh
+$ rm ~/.task/remote/*.yaml
+$ rm ~/.task/remote/*.checksum
+$ rm ~/.task/remote/*.timestamp
+```
