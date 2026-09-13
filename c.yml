@@ -27,6 +27,8 @@ tasks:
       - |
         {{.CC}} {{.CC_FLAGS}} \
         {{range .SOURCE_FILES}} {{.}} {{end}} \
+        {{.DYN_LIBS_USED_PATH}} \
+        {{.DYN_LIBS_USED}} \
         -O3 \
         -dynamiclib \
         -current_version {{.GH_RELEASE_VERSION}} \
@@ -123,6 +125,21 @@ tasks:
           REPO_NAME: c-util
           DYLIB_VERSION: 0.0.8
           DYLIB_NAME: util
+    status:
+      - otool -L /usr/local/lib/standardloop/libstandardloop-{{.DYLIB_NAME}}.dylib | head -n 2 | tail -n 1 | grep "current version {{.DYLIB_VERSION}}"
+
+  dependencies:collections:
+    vars:
+      REPO_NAME: c-collections
+      DYLIB_VERSION: 0.0.3
+      DYLIB_NAME: collections
+    cmds:
+      - sudo -v
+      - task: dependencies:helper-task
+        vars:
+          REPO_NAME: c-collections
+          DYLIB_VERSION: 0.0.3
+          DYLIB_NAME: collections
     status:
       - otool -L /usr/local/lib/standardloop/libstandardloop-{{.DYLIB_NAME}}.dylib | head -n 2 | tail -n 1 | grep "current version {{.DYLIB_VERSION}}"
   ####################################################### END ######################################################
