@@ -1,6 +1,22 @@
 ---
 version: "3"
 
+vars:
+  CC: clang
+  CC_FLAGS: "-Werror -Wextra -Wall -Wfree-nonheap-object -std=c17 -I/usr/local/include"
+  DYN_LIBS_USED_PATH: "-L/usr/local/lib/standardloop"
+  DYN_LIBS_USED: "-lstandardloop-logger"
+  TEST_EXECUTABLE_NAME: test
+  # SOURCE_FILES:
+  #   - todo.c
+  # TEST_SOURCE_FILES:
+  #   - todo.test.c
+  # for releasing
+  # DYLIB_NAME: libstandardloop-todo.dylib
+  # DYLIB_HEADER: todo.h
+  DYLIB_PATH: /usr/local/lib/standardloop/
+  DYLIB_INCLUDE_PATH: /usr/local/include/standardloop/
+
 tasks:
   ####################################################### RELEASE ######################################################
   # GH_RELEASE_VERSION is set by CI
