@@ -5,8 +5,8 @@ vars:
   CC: clang
   CC_FLAGS: "-Werror -Wextra -Wall -Wfree-nonheap-object -std=c17 -I/usr/local/include"
   DYN_LIBS_USED_PATH: "-L/usr/local/lib/standardloop"
-  DYN_LIBS_USED: "-lstandardloop-logger"
   TEST_EXECUTABLE_NAME: test
+  # DYN_LIBS_USED: "-lstandardloop-logger"
   # SOURCE_FILES:
   #   - todo.c
   # TEST_SOURCE_FILES:
@@ -74,6 +74,11 @@ tasks:
       - "*.c"
     generates:
       - "{{.TEST_EXECUTABLE_NAME}}-sanitize"
+
+  test:clean:
+    cmds:
+      - rm -f {{.TEST_EXECUTABLE_NAME}}-sanitize
+      - rm -f {{.TEST_EXECUTABLE_NAME}}
   ####################################################### END ######################################################
 
   ####################################################### DEPENDENCIES ######################################################
