@@ -3,7 +3,7 @@ version: "3"
 
 vars:
   CC: clang
-  CC_FLAGS: "-Werror -Wextra -Wall -Wfree-nonheap-object -std=c17 -I/usr/local/include"
+  CC_FLAGS: "-Werror -Wextra -Wall -Wshadow -Wfree-nonheap-object -std=c17 -I/usr/local/include"
   DYN_LIBS_USED_PATH: "-L/usr/local/lib/standardloop"
   TEST_EXECUTABLE_NAME: test
   # DYN_LIBS_USED: "-lstandardloop-logger"
