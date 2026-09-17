@@ -113,6 +113,25 @@ tasks:
     status:
       - otool -L /usr/local/lib/standardloop/libstandardloop-{{.DYLIB_NAME}}.dylib | head -n 2 | tail -n 1 | grep "current version {{.DYLIB_VERSION}}"
 
+  dependencies:logger:latest:
+    vars:
+      REPO_NAME: c-logger
+      DYLIB_VERSION_RAW:
+        sh: gh release list --repo standardloop/{{.REPO_NAME}} --limit 1 --json tagName --jq '.[0].tagName'
+      DYLIB_VERSION: '{{ trimPrefix "v" .DYLIB_VERSION_RAW }}'
+      DYLIB_NAME: logger
+    cmds:
+      - sudo -v
+      - task: dependencies:helper-task
+        vars:
+          REPO_NAME: c-logger
+          DYLIB_VERSION_RAW:
+            sh: gh release list --repo standardloop/{{.REPO_NAME}} --limit 1 --json tagName --jq '.[0].tagName'
+          DYLIB_VERSION: '{{ trimPrefix "v" .DYLIB_VERSION_RAW }}'
+          DYLIB_NAME: logger
+    status:
+      - otool -L /usr/local/lib/standardloop/libstandardloop-{{.DYLIB_NAME}}.dylib | head -n 2 | tail -n 1 | grep "current version {{.DYLIB_VERSION}}"
+
   dependencies:util:
     vars:
       REPO_NAME: c-util
@@ -128,6 +147,25 @@ tasks:
     status:
       - otool -L /usr/local/lib/standardloop/libstandardloop-{{.DYLIB_NAME}}.dylib | head -n 2 | tail -n 1 | grep "current version {{.DYLIB_VERSION}}"
 
+  dependencies:util:latest:
+    vars:
+      REPO_NAME: c-util
+      DYLIB_VERSION_RAW:
+        sh: gh release list --repo standardloop/{{.REPO_NAME}} --limit 1 --json tagName --jq '.[0].tagName'
+      DYLIB_VERSION: '{{ trimPrefix "v" .DYLIB_VERSION_RAW }}'
+      DYLIB_NAME: util
+    cmds:
+      - sudo -v
+      - task: dependencies:helper-task
+        vars:
+          REPO_NAME: c-util
+          DYLIB_VERSION_RAW:
+            sh: gh release list --repo standardloop/{{.REPO_NAME}} --limit 1 --json tagName --jq '.[0].tagName'
+          DYLIB_VERSION: '{{ trimPrefix "v" .DYLIB_VERSION_RAW }}'
+          DYLIB_NAME: util
+    status:
+      - otool -L /usr/local/lib/standardloop/libstandardloop-{{.DYLIB_NAME}}.dylib | head -n 2 | tail -n 1 | grep "current version {{.DYLIB_VERSION}}"
+
   dependencies:collections:
     vars:
       REPO_NAME: c-collections
@@ -139,6 +177,25 @@ tasks:
         vars:
           REPO_NAME: c-collections
           DYLIB_VERSION: 0.0.3
+          DYLIB_NAME: collections
+    status:
+      - otool -L /usr/local/lib/standardloop/libstandardloop-{{.DYLIB_NAME}}.dylib | head -n 2 | tail -n 1 | grep "current version {{.DYLIB_VERSION}}"
+
+  dependencies:collections:latest:
+    vars:
+      REPO_NAME: c-collections
+      DYLIB_VERSION_RAW:
+        sh: gh release list --repo standardloop/{{.REPO_NAME}} --limit 1 --json tagName --jq '.[0].tagName'
+      DYLIB_VERSION: '{{ trimPrefix "v" .DYLIB_VERSION_RAW }}'
+      DYLIB_NAME: collections
+    cmds:
+      - sudo -v
+      - task: dependencies:helper-task
+        vars:
+          REPO_NAME: c-collections
+          DYLIB_VERSION_RAW:
+            sh: gh release list --repo standardloop/{{.REPO_NAME}} --limit 1 --json tagName --jq '.[0].tagName'
+          DYLIB_VERSION: '{{ trimPrefix "v" .DYLIB_VERSION_RAW }}'
           DYLIB_NAME: collections
     status:
       - otool -L /usr/local/lib/standardloop/libstandardloop-{{.DYLIB_NAME}}.dylib | head -n 2 | tail -n 1 | grep "current version {{.DYLIB_VERSION}}"

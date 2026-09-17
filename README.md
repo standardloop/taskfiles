@@ -170,7 +170,14 @@ INFO[0000] done
 
 ## C
 
-Some reusable tasks for formating and generating docs.
+Reusable tasks to:
+
+- format code
+- generate docs
+- compile
+- compile with address sanitizing
+- run test
+- download my dylib dependencies
 
 ## Clearing cache
 
