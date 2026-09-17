@@ -135,14 +135,14 @@ tasks:
   dependencies:util:
     vars:
       REPO_NAME: c-util
-      DYLIB_VERSION: 0.0.8
+      DYLIB_VERSION: 0.0.9
       DYLIB_NAME: util
     cmds:
       - sudo -v
       - task: dependencies:helper-task
         vars:
           REPO_NAME: c-util
-          DYLIB_VERSION: 0.0.8
+          DYLIB_VERSION: 0.0.9
           DYLIB_NAME: util
     status:
       - otool -L /usr/local/lib/standardloop/libstandardloop-{{.DYLIB_NAME}}.dylib | head -n 2 | tail -n 1 | grep "current version {{.DYLIB_VERSION}}"
@@ -169,14 +169,14 @@ tasks:
   dependencies:collections:
     vars:
       REPO_NAME: c-collections
-      DYLIB_VERSION: 0.0.3
+      DYLIB_VERSION: 0.0.5
       DYLIB_NAME: collections
     cmds:
       - sudo -v
       - task: dependencies:helper-task
         vars:
           REPO_NAME: c-collections
-          DYLIB_VERSION: 0.0.3
+          DYLIB_VERSION: 0.0.5
           DYLIB_NAME: collections
     status:
       - otool -L /usr/local/lib/standardloop/libstandardloop-{{.DYLIB_NAME}}.dylib | head -n 2 | tail -n 1 | grep "current version {{.DYLIB_VERSION}}"
