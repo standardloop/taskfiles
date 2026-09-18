@@ -24,6 +24,7 @@ tasks:
     desc: "Build the dylib."
     run: once
     cmds:
+      - echo "{{.CI}}"
       - |
         {{.CC}} {{.CC_FLAGS}} \
         {{range .SOURCE_FILES}} {{.}} {{end}} \
