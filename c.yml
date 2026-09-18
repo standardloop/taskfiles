@@ -117,8 +117,12 @@ tasks:
     vars:
       REPO_NAME: c-logger
       DYLIB_VERSION_RAW:
-        sh: curl -s https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r '.tag_name'
-        # sh: gh release list --repo standardloop/{{.REPO_NAME}} --limit 1 --json tagName --jq '.[0].tagName'
+        sh: >
+          if [ -n "$CI" ]; then
+            curl -s -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r .tag_name
+          else
+            gh release list --repo standardloop/{{.REPO_NAME}} --limit 1 --json tagName --jq '.[0].tagName'
+          fi
       DYLIB_VERSION: '{{ trimPrefix "v" .DYLIB_VERSION_RAW }}'
       DYLIB_NAME: logger
     cmds:
@@ -127,7 +131,12 @@ tasks:
         vars:
           REPO_NAME: c-logger
           DYLIB_VERSION_RAW:
-            sh: curl -s https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r .tag_name
+            sh: >
+              if [ -n "$CI" ]; then
+                curl -s -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r .tag_name
+              else
+                gh release list --repo standardloop/{{.REPO_NAME}} --limit 1 --json tagName --jq '.[0].tagName'
+              fi
           DYLIB_VERSION: '{{ trimPrefix "v" .DYLIB_VERSION_RAW }}'
           DYLIB_NAME: logger
     status:
@@ -152,7 +161,12 @@ tasks:
     vars:
       REPO_NAME: c-util
       DYLIB_VERSION_RAW:
-        sh: curl -s https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r .tag_name
+        sh: >
+          if [ -n "$CI" ]; then
+            curl -s -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r .tag_name
+          else
+            gh release list --repo standardloop/{{.REPO_NAME}} --limit 1 --json tagName --jq '.[0].tagName'
+          fi
       DYLIB_VERSION: '{{ trimPrefix "v" .DYLIB_VERSION_RAW }}'
       DYLIB_NAME: util
     cmds:
@@ -161,7 +175,12 @@ tasks:
         vars:
           REPO_NAME: c-util
           DYLIB_VERSION_RAW:
-            sh: curl -s https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r .tag_name
+            sh: >
+              if [ -n "$CI" ]; then
+                curl -s -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r .tag_name
+              else
+                gh release list --repo standardloop/{{.REPO_NAME}} --limit 1 --json tagName --jq '.[0].tagName'
+              fi
           DYLIB_VERSION: '{{ trimPrefix "v" .DYLIB_VERSION_RAW }}'
           DYLIB_NAME: util
     status:
@@ -186,7 +205,12 @@ tasks:
     vars:
       REPO_NAME: c-collections
       DYLIB_VERSION_RAW:
-        sh: curl -s https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r .tag_name
+        sh: >
+          if [ -n "$CI" ]; then
+            curl -s -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r .tag_name
+          else
+            gh release list --repo standardloop/{{.REPO_NAME}} --limit 1 --json tagName --jq '.[0].tagName'
+          fi
       DYLIB_VERSION: '{{ trimPrefix "v" .DYLIB_VERSION_RAW }}'
       DYLIB_NAME: collections
     cmds:
@@ -195,7 +219,12 @@ tasks:
         vars:
           REPO_NAME: c-collections
           DYLIB_VERSION_RAW:
-            sh: curl -s https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r .tag_name
+            sh: >
+              if [ -n "$CI" ]; then
+                curl -s -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r .tag_name
+              else
+                gh release list --repo standardloop/{{.REPO_NAME}} --limit 1 --json tagName --jq '.[0].tagName'
+              fi
           DYLIB_VERSION: '{{ trimPrefix "v" .DYLIB_VERSION_RAW }}'
           DYLIB_NAME: collections
     status:
@@ -205,7 +234,12 @@ tasks:
     vars:
       REPO_NAME: c-json
       DYLIB_VERSION_RAW:
-        sh: curl -s https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r .tag_name
+        sh: >
+          if [ -n "$CI" ]; then
+            curl -s -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r .tag_name
+          else
+            gh release list --repo standardloop/{{.REPO_NAME}} --limit 1 --json tagName --jq '.[0].tagName'
+          fi
       DYLIB_VERSION: '{{ trimPrefix "v" .DYLIB_VERSION_RAW }}'
       DYLIB_NAME: json
     cmds:
@@ -214,7 +248,41 @@ tasks:
         vars:
           REPO_NAME: c-json
           DYLIB_VERSION_RAW:
-            sh: curl -s https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r .tag_name
+            sh: >
+              if [ -n "$CI" ]; then
+                curl -s -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r .tag_name
+              else
+                gh release list --repo standardloop/{{.REPO_NAME}} --limit 1 --json tagName --jq '.[0].tagName'
+              fi
+          DYLIB_VERSION: '{{ trimPrefix "v" .DYLIB_VERSION_RAW }}'
+          DYLIB_NAME: json
+    status:
+      - otool -L /usr/local/lib/standardloop/libstandardloop-{{.DYLIB_NAME}}.dylib | head -n 2 | tail -n 1 | grep "current version {{.DYLIB_VERSION}}"
+
+  dependencies:testing:latest:
+    vars:
+      REPO_NAME: c-testing
+      DYLIB_VERSION_RAW:
+        sh: >
+          if [ -n "$CI" ]; then
+            curl -s -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r .tag_name
+          else
+            gh release list --repo standardloop/{{.REPO_NAME}} --limit 1 --json tagName --jq '.[0].tagName'
+          fi
+      DYLIB_VERSION: '{{ trimPrefix "v" .DYLIB_VERSION_RAW }}'
+      DYLIB_NAME: json
+    cmds:
+      - sudo -v
+      - task: dependencies:helper-task
+        vars:
+          REPO_NAME: c-testing
+          DYLIB_VERSION_RAW:
+            sh: >
+              if [ -n "$CI" ]; then
+                curl -s -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r .tag_name
+              else
+                gh release list --repo standardloop/{{.REPO_NAME}} --limit 1 --json tagName --jq '.[0].tagName'
+              fi
           DYLIB_VERSION: '{{ trimPrefix "v" .DYLIB_VERSION_RAW }}'
           DYLIB_NAME: json
     status:
