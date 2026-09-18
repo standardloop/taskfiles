@@ -297,14 +297,14 @@ tasks:
     vars:
       REPO_NAME: c-testing
       DYLIB_VERSION: 0.0.4
-      DYLIB_NAME: json
+      DYLIB_NAME: testing
     cmds:
       - sudo -v
       - task: dependencies:helper-task
         vars:
           REPO_NAME: c-testing
           DYLIB_VERSION: 0.0.4
-          DYLIB_NAME: json
+          DYLIB_NAME: testing
     status:
       - otool -L /usr/local/lib/standardloop/libstandardloop-{{.DYLIB_NAME}}.dylib | head -n 2 | tail -n 1 | grep "current version {{.DYLIB_VERSION}}"
 
@@ -319,7 +319,7 @@ tasks:
             gh release list --repo standardloop/{{.REPO_NAME}} --limit 1 --json tagName --jq '.[0].tagName'
           fi
       DYLIB_VERSION: '{{ trimPrefix "v" .DYLIB_VERSION_RAW }}'
-      DYLIB_NAME: json
+      DYLIB_NAME: testing
     cmds:
       - sudo -v
       - task: dependencies:helper-task
@@ -333,7 +333,7 @@ tasks:
                 gh release list --repo standardloop/{{.REPO_NAME}} --limit 1 --json tagName --jq '.[0].tagName'
               fi
           DYLIB_VERSION: '{{ trimPrefix "v" .DYLIB_VERSION_RAW }}'
-          DYLIB_NAME: json
+          DYLIB_NAME: testing
     status:
       - otool -L /usr/local/lib/standardloop/libstandardloop-{{.DYLIB_NAME}}.dylib | head -n 2 | tail -n 1 | grep "current version {{.DYLIB_VERSION}}"
   ####################################################### END ######################################################
