@@ -53,6 +53,7 @@ tasks:
         {{range .TEST_SOURCE_FILES}} {{.}} {{end}} \
         {{.DYN_LIBS_USED_PATH}} \
         {{.DYN_LIBS_USED}} \
+        -lstandardloop-testing \
         -o {{.TEST_EXECUTABLE_NAME}}
     sources:
       - "*.c"
@@ -70,6 +71,7 @@ tasks:
         {{range .TEST_SOURCE_FILES}} {{.}} {{end}} \
         {{.DYN_LIBS_USED_PATH}} \
         {{.DYN_LIBS_USED}} \
+        -lstandardloop-testing \
         -fsanitize=address \
         -fno-omit-frame-pointer \
         -o {{.TEST_EXECUTABLE_NAME}}-sanitize
