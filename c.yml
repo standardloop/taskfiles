@@ -236,6 +236,8 @@ tasks:
   docs:doxygen:
     desc: "https://www.doxygen.nl/"
     cmds:
+      - mkdir -p doxygen/html
+      - mkdir -p doxygen/xml
       - doxygen Doxyfile
 
   docs:moxygen:
@@ -243,6 +245,8 @@ tasks:
     deps:
       - docs:doxygen
     cmds:
+      - mkdir docs
+      - touch dox/index.md
       - moxygen doxygen/xml/ --output docs/index.md --quiet --language cpp
       - sed -i '' '/^Defined in /d' docs/index.md
       - sed -i '' 's/#include <\(.*\)>/#include <standardloop\/\1>/g' docs/index.md
