@@ -99,17 +99,48 @@ tasks:
         sudo mv libstandardloop-{{.DYLIB_NAME}}.dylib /usr/local/lib/standardloop/
         sudo mv {{.DYLIB_NAME}}.h /usr/local/include/standardloop/ && rm libstandardloop-{{.DYLIB_NAME}}.zip
 
+  dependencies:helper-get-latest:
+    internal: true
+    silent: true
+    cmds:
+      - |
+        printf "{{.REPO_NAME}}: "
+        if [ -n "$CI" ]; then
+          curl -s -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r .tag_name
+        else
+          gh release list --repo standardloop/{{.REPO_NAME}} --limit 1 --json tagName --jq '.[0].tagName'
+        fi
+
+  dependencies:get-latest:
+    silent: true
+    cmds:
+      - task: dependencies:helper-get-latest
+        vars:
+          REPO_NAME: c-logger
+      - task: dependencies:helper-get-latest
+        vars:
+          REPO_NAME: c-util
+      - task: dependencies:helper-get-latest
+        vars:
+          REPO_NAME: c-collections
+      - task: dependencies:helper-get-latest
+        vars:
+          REPO_NAME: c-testing
+      - task: dependencies:helper-get-latest
+        vars:
+          REPO_NAME: c-json
+
   dependencies:logger:
     vars:
       REPO_NAME: c-logger
-      DYLIB_VERSION: 0.3.0
+      DYLIB_VERSION: 0.3.1
       DYLIB_NAME: logger
     cmds:
       - sudo -v
       - task: dependencies:helper-task
         vars:
           REPO_NAME: c-logger
-          DYLIB_VERSION: 0.3.0
+          DYLIB_VERSION: 0.3.1
           DYLIB_NAME: logger
     status:
       - otool -L /usr/local/lib/standardloop/libstandardloop-{{.DYLIB_NAME}}.dylib | head -n 2 | tail -n 1 | grep "current version {{.DYLIB_VERSION}}"
@@ -118,7 +149,7 @@ tasks:
     vars:
       REPO_NAME: c-logger
       DYLIB_VERSION_RAW:
-        sh: >
+        sh: |
           if [ -n "$CI" ]; then
             curl -s -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r .tag_name
           else
@@ -132,7 +163,7 @@ tasks:
         vars:
           REPO_NAME: c-logger
           DYLIB_VERSION_RAW:
-            sh: >
+            sh: |
               if [ -n "$CI" ]; then
                 curl -s -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r .tag_name
               else
@@ -162,7 +193,7 @@ tasks:
     vars:
       REPO_NAME: c-util
       DYLIB_VERSION_RAW:
-        sh: >
+        sh: |
           if [ -n "$CI" ]; then
             curl -s -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r .tag_name
           else
@@ -176,7 +207,7 @@ tasks:
         vars:
           REPO_NAME: c-util
           DYLIB_VERSION_RAW:
-            sh: >
+            sh: |
               if [ -n "$CI" ]; then
                 curl -s -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r .tag_name
               else
@@ -206,7 +237,7 @@ tasks:
     vars:
       REPO_NAME: c-collections
       DYLIB_VERSION_RAW:
-        sh: >
+        sh: |
           if [ -n "$CI" ]; then
             curl -s -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r .tag_name
           else
@@ -220,7 +251,7 @@ tasks:
         vars:
           REPO_NAME: c-collections
           DYLIB_VERSION_RAW:
-            sh: >
+            sh: |
               if [ -n "$CI" ]; then
                 curl -s -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r .tag_name
               else
@@ -235,7 +266,7 @@ tasks:
     vars:
       REPO_NAME: c-json
       DYLIB_VERSION_RAW:
-        sh: >
+        sh: |
           if [ -n "$CI" ]; then
             curl -s -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r .tag_name
           else
@@ -249,7 +280,7 @@ tasks:
         vars:
           REPO_NAME: c-json
           DYLIB_VERSION_RAW:
-            sh: >
+            sh: |
               if [ -n "$CI" ]; then
                 curl -s -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r .tag_name
               else
@@ -264,7 +295,7 @@ tasks:
     vars:
       REPO_NAME: c-testing
       DYLIB_VERSION_RAW:
-        sh: >
+        sh: |
           if [ -n "$CI" ]; then
             curl -s -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r .tag_name
           else
@@ -278,7 +309,7 @@ tasks:
         vars:
           REPO_NAME: c-testing
           DYLIB_VERSION_RAW:
-            sh: >
+            sh: |
               if [ -n "$CI" ]; then
                 curl -s -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r .tag_name
               else
