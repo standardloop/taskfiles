@@ -1,0 +1,40 @@
+---
+version: "3"
+
+tasks:
+  docs:
+    vars:
+      TASK_FILES:
+        - c.yml
+        - colima.yml
+        - color.yml
+        - rancher.yml
+        # - docker.yml
+    cmds:
+      - |
+        {{range .TASK_FILES}}
+          perl -i -0777 -pe '
+            BEGIN {
+              my $yaml = `yq '\''(.tasks // {}) | to_entries | .[] | .key + "\t" + (.value.desc // "")'\'' {{.}}`;
+              my @lines = split("\n", $yaml);
+
+              # Find the longest task key length dynamically
+              my $max_len = 0;
+              for (@lines) {
+                my ($k) = split(/\t/);
+                $max_len = length($k) if length($k) >$max_len;
+              }
+
+              # Format lines with dynamic sprintf padding
+              my $formatted = "task: Available tasks for this project:\n";
+              for (@lines) {
+                my ($k,$d) = split(/\t/);
+                $formatted .= sprintf("* \%-*s \%s\n", $max_len + 2, $k,$d);
+              }
+
+              $block = "```sh\n${formatted}```";
+            }
+            s/(<!-- {{.}} TASKS_START -->\n)(.*?)(<!-- {{.}} TASKS_END -->)/${1}${block}\n${3}/s
+          ' README.md
+          {{end}}
+      - npx prettier --write README.md --log-level silent

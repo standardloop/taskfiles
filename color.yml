@@ -1,5 +1,5 @@
 ---
-version: '3'
+version: "3"
 
 vars:
   TEXT_BOLD: { sh: tput bold }

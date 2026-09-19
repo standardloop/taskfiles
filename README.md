@@ -29,17 +29,19 @@ includes:
 
 ## Color
 
-This Taskfile is for sharing variables that allow for settings text color.
+### Task List
 
-There is one task, but is just for testing that variables.
+<!-- color.yml TASKS_START -->
 
 ```sh
-$ task --taskfile color.yml --list-all
 task: Available tasks for this project:
-* default:             (aliases: all)
-* test:          Prints out all the colors avaiable.
-$ task --taskfile color.yml
+* default
+* test      Prints out all the colors avaiable.
 ```
+
+<!-- color.yml TASKS_END -->
+
+This Taskfile is for sharing variables that allow for settings text color.
 
 ![alt text](https://raw.githubusercontent.com/standardloop/taskfiles/refs/heads/main/docs/color.png)
 
@@ -74,6 +76,18 @@ tasks:
 ## Rancher
 
 This Taskfile contains tasks for spinning up [rancher docker engine](https://github.com/rancher-sandbox/rancher-desktop/).
+
+### Task List
+
+<!-- rancher.yml TASKS_START -->
+
+```sh
+task: Available tasks for this project:
+* start   Start Rancher Docker Engine
+* clean   Shutdown Rancher Docker Engine
+```
+
+<!-- rancher.yml TASKS_END -->
 
 ### Using in your Taskfile
 
@@ -120,6 +134,18 @@ Shutting down.
 ## Colima
 
 This Taskfile contains tasks for spinning up [colima docker engine](https://github.com/abiosoft/colima).
+
+### Task List
+
+<!-- colima.yml TASKS_START -->
+
+```sh
+task: Available tasks for this project:
+* start   Start up colima.
+* clean   Delete colima, automatically say yes.
+```
+
+<!-- colima.yml TASKS_END -->
 
 ### Using in your Taskfile
 
@@ -178,6 +204,37 @@ Reusable tasks to:
 - compile with address sanitizing
 - run test
 - download my dylib dependencies
+
+### Task List
+
+<!-- c.yml TASKS_START -->
+
+```sh
+task: Available tasks for this project:
+* release                           Build the dylib.
+* test:build                        Build the test program.
+* test:build-sanitize               Build the test with address sanitizer on.
+* test:clean
+* dependencies:helper-task
+* dependencies:helper-get-latest
+* dependencies:get-latest
+* dependencies:logger
+* dependencies:logger:latest
+* dependencies:util
+* dependencies:util:latest
+* dependencies:collections
+* dependencies:collections:latest
+* dependencies:json:latest
+* dependencies:testing
+* dependencies:testing:latest
+* fmt
+* docs
+* docs:doxygen                      https://www.doxygen.nl/
+* docs:moxygen                      https://0state.com/moxygen
+* docs:readme
+```
+
+<!-- c.yml TASKS_END -->
 
 ## Clearing cache
 

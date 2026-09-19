@@ -1,20 +1,13 @@
 ---
-version: '3'
+version: "3"
 
 includes:
   color: color.yml
   docker: docker.yml
 
 tasks:
-  default:
-    aliases: [all]
-    silent: true
-    deps:
-      - start
-
   start:
-    desc: |
-      Start up colima.
+    desc: Start up colima.
     run: once
     silent: true
     aliases: [run, deploy, on, init]
@@ -28,8 +21,7 @@ tasks:
       - docker info > /dev/null 2>&1
 
   clean:
-    desc: |
-      Delete colima, automatically say yes.
+    desc: Delete colima, automatically say yes.
     run: once
     aliases: [destroy, shutdown, delete, off, clean]
     vars:
