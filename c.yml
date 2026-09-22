@@ -18,6 +18,7 @@ vars:
   DYLIB_INCLUDE_PATH: /usr/local/include/standardloop/
 
 tasks:
+  check-ci: echo "{{.CI}}"
   ####################################################### RELEASE ######################################################
   # GH_RELEASE_VERSION is set by CI
   release:

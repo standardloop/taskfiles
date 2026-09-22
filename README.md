@@ -211,6 +211,7 @@ Reusable tasks to:
 
 ```sh
 task: Available tasks for this project:
+* check-ci
 * release                           Build the dylib.
 * test:build                        Build the test program.
 * test:build-sanitize               Build the test with address sanitizer on.
