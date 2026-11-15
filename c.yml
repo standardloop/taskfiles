@@ -398,3 +398,4 @@ tasks:
         ' README.md
       - npx prettier --write README.md --log-level silent
   ####################################################### END ######################################################
+  cloc: cloc --exclude-dir=doxygen,docs .

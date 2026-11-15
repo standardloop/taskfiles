@@ -233,6 +233,7 @@ task: Available tasks for this project:
 * docs:doxygen                      https://www.doxygen.nl/
 * docs:moxygen                      https://0state.com/moxygen
 * docs:readme
+* cloc
 ```
 
 <!-- c.yml TASKS_END -->
