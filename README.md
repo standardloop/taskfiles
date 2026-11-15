@@ -225,9 +225,12 @@ task: Available tasks for this project:
 * dependencies:util:latest
 * dependencies:collections
 * dependencies:collections:latest
+* dependencies:json
 * dependencies:json:latest
 * dependencies:testing
 * dependencies:testing:latest
+* dependencies:yaml
+* dependencies:yaml:latest
 * fmt
 * docs
 * docs:doxygen                      https://www.doxygen.nl/

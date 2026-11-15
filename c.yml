@@ -132,6 +132,9 @@ tasks:
       - task: dependencies:helper-get-latest
         vars:
           REPO_NAME: c-json
+      - task: dependencies:helper-get-latest
+        vars:
+          REPO_NAME: c-yaml
 
   dependencies:logger:
     vars:
@@ -224,14 +227,14 @@ tasks:
   dependencies:collections:
     vars:
       REPO_NAME: c-collections
-      DYLIB_VERSION: 0.0.5
+      DYLIB_VERSION: 0.0.8
       DYLIB_NAME: collections
     cmds:
       - sudo -v
       - task: dependencies:helper-task
         vars:
           REPO_NAME: c-collections
-          DYLIB_VERSION: 0.0.5
+          DYLIB_VERSION: 0.0.8
           DYLIB_NAME: collections
     status:
       - otool -L /usr/local/lib/standardloop/libstandardloop-{{.DYLIB_NAME}}.dylib | head -n 2 | tail -n 1 | grep "current version {{.DYLIB_VERSION}}"
@@ -262,6 +265,21 @@ tasks:
               fi
           DYLIB_VERSION: '{{ trimPrefix "v" .DYLIB_VERSION_RAW }}'
           DYLIB_NAME: collections
+    status:
+      - otool -L /usr/local/lib/standardloop/libstandardloop-{{.DYLIB_NAME}}.dylib | head -n 2 | tail -n 1 | grep "current version {{.DYLIB_VERSION}}"
+
+  dependencies:json:
+    vars:
+      REPO_NAME: c-json
+      DYLIB_VERSION: 0.0.7
+      DYLIB_NAME: json
+    cmds:
+      - sudo -v
+      - task: dependencies:helper-task
+        vars:
+          REPO_NAME: c-jon
+          DYLIB_VERSION: 0.0.7
+          DYLIB_NAME: json
     status:
       - otool -L /usr/local/lib/standardloop/libstandardloop-{{.DYLIB_NAME}}.dylib | head -n 2 | tail -n 1 | grep "current version {{.DYLIB_VERSION}}"
 
@@ -335,6 +353,50 @@ tasks:
               fi
           DYLIB_VERSION: '{{ trimPrefix "v" .DYLIB_VERSION_RAW }}'
           DYLIB_NAME: testing
+    status:
+      - otool -L /usr/local/lib/standardloop/libstandardloop-{{.DYLIB_NAME}}.dylib | head -n 2 | tail -n 1 | grep "current version {{.DYLIB_VERSION}}"
+
+  dependencies:yaml:
+    vars:
+      REPO_NAME: c-yaml
+      DYLIB_VERSION: 0.0.0
+      DYLIB_NAME: yaml
+    cmds:
+      - sudo -v
+      - task: dependencies:helper-task
+        vars:
+          REPO_NAME: c-yaml
+          DYLIB_VERSION: 0.0.0
+          DYLIB_NAME: yaml
+    status:
+      - otool -L /usr/local/lib/standardloop/libstandardloop-{{.DYLIB_NAME}}.dylib | head -n 2 | tail -n 1 | grep "current version {{.DYLIB_VERSION}}"
+
+  dependencies:yaml:latest:
+    vars:
+      REPO_NAME: c-yaml
+      DYLIB_VERSION_RAW:
+        sh: |
+          if [ -n "$CI" ]; then
+            curl -s -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r .tag_name
+          else
+            gh release list --repo standardloop/{{.REPO_NAME}} --limit 1 --json tagName --jq '.[0].tagName'
+          fi
+      DYLIB_VERSION: '{{ trimPrefix "v" .DYLIB_VERSION_RAW }}'
+      DYLIB_NAME: yaml
+    cmds:
+      - sudo -v
+      - task: dependencies:helper-task
+        vars:
+          REPO_NAME: c-yaml
+          DYLIB_VERSION_RAW:
+            sh: |
+              if [ -n "$CI" ]; then
+                curl -s -H "Authorization: Bearer $GITHUB_TOKEN" https://api.github.com/repos/standardloop/{{.REPO_NAME}}/releases/latest | jq -r .tag_name
+              else
+                gh release list --repo standardloop/{{.REPO_NAME}} --limit 1 --json tagName --jq '.[0].tagName'
+              fi
+          DYLIB_VERSION: '{{ trimPrefix "v" .DYLIB_VERSION_RAW }}'
+          DYLIB_NAME: yaml
     status:
       - otool -L /usr/local/lib/standardloop/libstandardloop-{{.DYLIB_NAME}}.dylib | head -n 2 | tail -n 1 | grep "current version {{.DYLIB_VERSION}}"
   ####################################################### END ######################################################
